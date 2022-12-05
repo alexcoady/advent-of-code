@@ -1,5 +1,9 @@
 import { input } from './input'
 
+// All in the pre-sorting.
+// Order the pairs so that the first pair starts with the lowest first value
+// If they both have the same first value, order so the larger 2nd value is last
+
 const pairs = input.split('\n').map((pair) =>
   pair
     .split(',')

@@ -1,6 +1,6 @@
 import { input } from './input'
 
-const rawStacks = input.match(/^((\[[A-Z]\]|\s{3})\s){8}(\[[A-Z]\]|\s{3})$/gm)
+const rawStacks = input.match(/^.+\[[A-Z]\].+$/gm)
 
 const STACK_COUNT = (rawStacks[0].length + 1) / 4
 const initialStacks = Array.from({ length: STACK_COUNT }).map(() => [])

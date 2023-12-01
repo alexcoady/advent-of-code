@@ -1,4 +1,3 @@
-console.log('here we go!')
 import { input } from './input'
 
 const part1 = () => {

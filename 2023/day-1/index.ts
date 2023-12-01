@@ -34,7 +34,7 @@ const part2 = () => {
     .split(/\n/)
     .map((str) => {
       const matches = Array.from(
-        str.matchAll(/\d|(?=(one|two|three|four|five|six|seven|eight|nine))/g)
+        str.matchAll(/\d|(?=(one|two|three|four|five|six|seven|eight|nine))/g) // ?= ensures we capture both "one" and "eight" from "oneight"
       )
       return [matches[0], matches[matches.length - 1]]
         .map((regexMatch) => asNumStr(extractRegexValue(regexMatch)))

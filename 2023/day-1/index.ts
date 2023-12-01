@@ -24,6 +24,9 @@ const part2 = () => {
       nine: '9',
     }[value] ?? value)
 
+  /**
+   * hate this but the value is either at index 0 or 1 depending if it's a group or not
+   */
   const extractRegexValue = (regExMatch: RegExpMatchArray) =>
     regExMatch[0].length > 0 ? regExMatch[0] : regExMatch[1]
 

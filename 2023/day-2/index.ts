@@ -16,7 +16,7 @@ const part1 = () => {
     return valuesMatched.every((value) => {
       // return true if it's within max count
       const [_, countStr, color] = value.match(/(\d+) (blue|green|red)/)
-      return cubeCounts[color] >= +countStr
+      return +countStr <= cubeCounts[color]
     })
   })
   return possible.reduce((result, game) => result + parseInt(game.gameId), 0)

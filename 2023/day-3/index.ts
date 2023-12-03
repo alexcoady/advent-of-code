@@ -1,29 +1,20 @@
 import { input } from './input'
 
-const rows = input.split(/\n/)
-const rowValues = rows.map((row) => {
-  const match = [...row.matchAll(/\d+/g)]
-  return match
-})
+const rowStrings = input.split(/\n/)
+const rowValues = rowStrings.map((row) => [...row.matchAll(/\d+/g)])
 
+/**
+ * loop around the number and test for symbol
+ */
 const touchesSymbol = (
   startRow: number,
   match: RegExpMatchArray,
   symbol: RegExp
 ) => {
   const strLength = `${match}`.length
-  for (
-    let row = Math.max(0, startRow - 1);
-    row <= Math.min(startRow + 1, rows.length - 1);
-    row += 1
-  ) {
-    for (
-      let col = Math.max(0, match.index - 1);
-      col <= Math.min(match.index + strLength, rows[row].length - 1);
-      col += 1
-    ) {
-      if (row === 0 && col === 0) continue
-      if (rows[row][col].match(symbol)) {
+  for (let row = startRow - 1; row <= startRow + 1; row += 1) {
+    for (let col = match.index - 1; col <= match.index + strLength; col += 1) {
+      if (rowStrings[row]?.[col]?.match(symbol)) {
         return { row, col }
       }
     }

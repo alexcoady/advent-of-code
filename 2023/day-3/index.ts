@@ -11,23 +11,20 @@ const touchesSymbol = (
   match: RegExpMatchArray,
   symbol: RegExp
 ) => {
-  for (let charIndex = 0; charIndex < `${match}`.length; charIndex += 1) {
-    // Each char within the number
-    const startCol = match.index + charIndex
+  const strLength = `${match}`.length
+  for (
+    let row = Math.max(0, startRow - 1);
+    row <= Math.min(startRow + 1, rows.length - 1);
+    row += 1
+  ) {
     for (
-      let rowIndex = Math.max(0, startRow - 1);
-      rowIndex <= Math.min(startRow + 1, rows.length - 1);
-      rowIndex += 1
+      let col = Math.max(0, match.index - 1);
+      col <= Math.min(match.index + strLength, rows[row].length - 1);
+      col += 1
     ) {
-      for (
-        let colIndex = Math.max(0, startCol - 1);
-        colIndex <= Math.min(startCol + 1, rows[rowIndex].length - 1);
-        colIndex += 1
-      ) {
-        if (rowIndex === 0 && colIndex === 0) continue
-        if (rows[rowIndex][colIndex].match(symbol)) {
-          return { row: rowIndex, col: colIndex }
-        }
+      if (row === 0 && col === 0) continue
+      if (rows[row][col].match(symbol)) {
+        return { row, col }
       }
     }
   }

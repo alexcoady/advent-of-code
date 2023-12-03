@@ -4,7 +4,13 @@ const rowStrings = input.split(/\n/)
 const rowValues = rowStrings.map((row) => [...row.matchAll(/\d+/g)])
 
 /**
- * loop around the number and test for symbol
+ * loop around the number and test for symbol by checking all locations (X):
+ *
+ * XXXXXXXX
+ * XNUMBERX
+ * XXXXXXXX
+ *
+ * until symbol is matched (coords of matched symbol returned)
  */
 const touchesSymbol = (
   startRow: number,

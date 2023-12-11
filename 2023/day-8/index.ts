@@ -55,7 +55,7 @@ const lowestCommonMultiple = (values: number[]) => {
   function lcm(a: number, b: number) {
     return (a * b) / gcd(a, b)
   }
-  return values.reduce((result, value) => lcm(result, value), 1)
+  return values.reduce(lcm, 1)
 }
 
 const part1 = () => {

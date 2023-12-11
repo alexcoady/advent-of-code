@@ -37,14 +37,12 @@ const findCountIterator = (
       const nextLocation = entry[direction]
       const nextEntry = entryMap.get(nextLocation)
 
-      // Update values
       entry = nextEntry
       index += 1
-      const doneThisTime = isDone(entry)
-      done = doneThisTime
+      done = isDone(entry)
       return {
         value: index,
-        done: doneThisTime,
+        done,
       }
     },
   }
@@ -54,17 +52,10 @@ const lowestCommonMultiple = (values: number[]) => {
   function gcd(a: number, b: number) {
     return !b ? a : gcd(b, a % b)
   }
-
   function lcm(a: number, b: number) {
     return (a * b) / gcd(a, b)
   }
-
-  let result = 1
-  values.forEach((value) => {
-    result = lcm(result, value)
-  })
-
-  return result
+  return values.reduce((result, value) => lcm(result, value), 1)
 }
 
 const part1 = () => {
@@ -82,15 +73,13 @@ const part1 = () => {
 console.log(`Part 1 = ${part1()}`)
 
 const part2 = () => {
-  const startingLocations = [...entryMap.keys()].filter((entryKey) =>
-    entryKey.endsWith('A')
-  )
-
-  const iterators = startingLocations.map((location) =>
-    findCountIterator(entryMap.get(location), (entry) =>
-      entry.location.endsWith('Z')
+  const iterators = [...entryMap.keys()]
+    .filter((entryKey) => entryKey.endsWith('A'))
+    .map((location) =>
+      findCountIterator(entryMap.get(location), (entry) =>
+        entry.location.endsWith('Z')
+      )
     )
-  )
 
   let results = iterators.map((iterator) => iterator.next())
   while (results.some((result) => !result.done)) {

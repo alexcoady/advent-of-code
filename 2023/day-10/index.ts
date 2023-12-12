@@ -137,6 +137,7 @@ const part2 = () => {
   const locations = findAllLocations(true)
 
   // Shoelace algorithm
+  // This will be the area up to AND INCLUDING the edges
   const area = locations.reduce((result, location, index, array) => {
     const isLast = index === array.length - 1
     if (isLast) {
@@ -148,6 +149,7 @@ const part2 = () => {
   }, 0)
 
   // Pick's law
+  // Return the above area minus the edges
   return Math.abs(area) - Math.floor(locations.length / 2) + 1
 }
 
